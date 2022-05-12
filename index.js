@@ -1,5 +1,4 @@
 // Importamos Express
-const { text } = require('express');
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -37,7 +36,11 @@ const comments = [
     }
 ];
 
+// Route to Display all comments
+app.get('/comments',(req,res) =>{
+    res.render('comments/index.ejs')
 
+});
 
 
 
