@@ -10,7 +10,8 @@
     <h1>All my comments of My fake DB</h1>
     <ul>
         <% for (comment of comments){ %>
-            <li><%= comment.text %> -- <b><%= comment.username %> </b> <a href="/comments/<%= comment.id %> ">Detail</a> </li>
+            <li><%= comment.text %> -- <b><%= comment.username %> </b> 
+            <a href="/comments/<%= comment.id %> ">Detail</a> - <a href="/comments/<%= comment.id %>/edit">Editar</a></li>
         <% } %> 
     </ul>
     

@@ -3,6 +3,11 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
+const methodOverride = require('method-override');
+
+// Configurando method Override
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'))
 
 
 // Configurando ejs
@@ -65,6 +70,20 @@ app.get('/comments/:id', (req,res)=>{
     const comment = comments.find((c)=> c.id == id);
     res.render('comments/show',{id,comment})
 });
+
+// Routes to Edit an existing Comment
+app.get('/comments/:id/edit', (req,res) =>{
+    const { id } = req.params;
+    const comment = comments.find((c)=> c.id == id);
+    res.render('comments/edit', { id, comment });
+});
+app.patch('/comments/:id', (req,res) =>{
+    const { id } = req.params;
+    const newText = req.body.text;
+    const foundComment = comments.find(c=> c.id == id);
+    foundComment.text = newText;
+    res.redirect('/comments');
+})
 
 
 app.listen(3000, ()=>{
