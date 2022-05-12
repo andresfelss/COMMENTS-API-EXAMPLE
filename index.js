@@ -4,6 +4,7 @@ const app = express();
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const methodOverride = require('method-override');
+const { redirect } = require('express/lib/response');
 
 // Configurando method Override
 // override with POST having ?_method=DELETE
@@ -20,7 +21,7 @@ app.use(express.json());
 
 // Configuramos nuestro comment
 
-const comments = [
+let comments = [
     {
         id: uuidv4(),
         username: 'Andres',
@@ -60,7 +61,8 @@ app.get('/comments/new', (req,res)=>{
 });
 app.post('/comments', (req,res) =>{
     const {username, text} = req.body;
-    comments.push({username, text});  
+    const id = uuidv4();
+    comments.push({ id, username, text});  
     res.redirect('/comments');
 });
 
@@ -85,6 +87,12 @@ app.patch('/comments/:id', (req,res) =>{
     res.redirect('/comments');
 })
 
+// Routes to delete an existing comment
+app.delete('/comments/:id', (req,res)=>{
+    const { id } = req.params;
+    comments = comments.filter(c => c.id != id); // filtro todo en un nuevo array, es mejor no mutarlo OJO!! (SE PUEDE PERO NO ES RECOMENDABLE)
+    res.redirect('/comments');
+});
 
 app.listen(3000, ()=>{
     console.log('Server Listenign on port 3000 http://localhost:3000/');
