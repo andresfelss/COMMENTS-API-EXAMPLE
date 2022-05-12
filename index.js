@@ -2,6 +2,8 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
+
 
 // Configurando ejs
 app.set('view engine','ejs'); // Recordemos que express lo importa solo
@@ -15,22 +17,27 @@ app.use(express.json());
 
 const comments = [
     {
+        id: uuidv4(),
         username: 'Andres',
         text: 'lol thats so funny'
     },
     {
+        id: uuidv4(),
         username: 'Nora',
         text: 'Estas bella amiga'
     },
     {
+        id: uuidv4(),
         username: 'Angue',
         text: 'Ahora soy paisa y que'
     },
     {
+        id: uuidv4(),
         username: 'Fary',
         text: 'Me creo la monda y lo soy'
     },
     {
+        id: uuidv4(),
         username: 'Pacho',
         text: 'Ey que tuyo, no sera tuyo'
     }
@@ -52,6 +59,12 @@ app.post('/comments', (req,res) =>{
     res.redirect('/comments');
 });
 
+// Route to show comment Detail
+app.get('/comments/:id', (req,res)=>{
+    const {id} = req.params;
+    const comment = comments.find((c)=> c.id == id);
+    res.render('comments/show',{id,comment})
+});
 
 
 app.listen(3000, ()=>{

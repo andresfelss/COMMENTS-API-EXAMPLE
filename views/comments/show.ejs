@@ -7,12 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>All my comments of My fake DB</h1>
-    <ul>
-        <% for (comment of comments){ %>
-            <li><%= comment.text %> -- <b><%= comment.username %> </b> <a href="/comments/<%= comment.id %> ">Detail</a> </li>
-        <% } %> 
-    </ul>
+
+    <h1>The comment of <%= comment.username %> is:</h1>
+    <h2> <%= comment.text  %> </h2>  
     
 </body>
 </html>
