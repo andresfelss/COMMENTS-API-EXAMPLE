@@ -38,7 +38,7 @@ const comments = [
 
 // Route to Display all comments
 app.get('/comments',(req,res) =>{
-    res.render('comments/index.ejs')
+    res.render('comments/index.ejs', {comments});
 
 });
 

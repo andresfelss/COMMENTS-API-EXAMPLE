@@ -8,7 +8,11 @@
 </head>
 <body>
     <h1>All my comments of My fake DB</h1>
-    
+    <ul>
+        <% for (comment of comments){ %>
+            <li><%= comment.text %> -- <b><%= comment.username %> </b> </li>
+        <% } %> 
+    </ul>
     
 </body>
 </html>
