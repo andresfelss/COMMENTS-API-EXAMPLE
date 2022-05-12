@@ -42,6 +42,15 @@ app.get('/comments',(req,res) =>{
 
 });
 
+// Route to the form to create a new Comment
+app.get('/comments/new', (req,res)=>{
+    res.render('comments/new');
+});
+app.post('/comments', (req,res) =>{
+    const {username, text} = req.body;
+    comments.push({username, text});  
+    res.redirect('/comments');
+});
 
 
 
